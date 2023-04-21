@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import InputForm from './InputForm/InputForm';
+import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
@@ -25,8 +25,10 @@ class App extends Component {
       id: nanoid(),
       number: event.target[1].value,
     };
-    const names = actualContacts.contacts.map(contact => contact.name);
-    if (names.includes(addedContact.name)) {
+    const names = actualContacts.contacts.map(contact =>
+      contact.name.toLocaleLowerCase()
+    );
+    if (names.includes(addedContact.name.toLocaleLowerCase())) {
       return alert(`${addedContact.name} is already in contacts.`);
     }
     actualContacts.contacts.push(addedContact);
@@ -59,7 +61,7 @@ class App extends Component {
     return (
       <>
         <h1>Phonebook</h1>
-        <InputForm onSubmit={this.handleAddContact} />
+        <ContactForm onSubmit={this.handleAddContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.filterFun} />
         <ContactsList
