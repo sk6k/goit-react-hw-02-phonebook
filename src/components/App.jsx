@@ -35,6 +35,8 @@ class App extends Component {
     this.setState({
       ...actualContacts,
     });
+    event.target[0].value = '';
+    event.target[1].value = '';
   };
 
   filterFun = event => {
